@@ -13,6 +13,7 @@ use strict;
 # constants
 my $RAWLOG     = 0x01;
 my $MAX_UNIQUE = 10;
+my $SEP = '\|';                                        # fields separator 
 
 # timestamp management
 my $ts_fid  = undef;                                   # timestamp field number
@@ -110,7 +111,7 @@ sub process_log_entry($) {
 
 sub analyze_log_entry($) {
     my $l = shift @_;
-    my @field = split /\|/, $l;
+    my @field = split /$SEP/, $l;
 
     # trim timestamp field to seconds and update data in %ts_eps and %ts_data
     if ( $field[$ts_fid] =~ /$ts_fmt/ ) {
